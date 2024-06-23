@@ -1,0 +1,69 @@
+import random
+import time
+
+# List of available lights in the home
+lights = ['Living room', 'Kitchen', 'Bedroom', 'Bathroom']
+
+# Simulate occupancy by randomly turning on/off lights
+def simulate_occupancy():
+    while True:
+        light = random.choice(lights)
+        state = random.choice(['On', 'Off'])
+        print(f'Turning {state} {light} light')
+        time.sleep(random.randint(1, 10))
+
+# AI system to make intelligent decisions about when to turn lights on/off
+class SmartLight:
+    def __init__(self, room):
+        self.room = room
+        self.state = 'Off'
+
+    def turn_on(self):
+        if self.state == 'Off':
+            self.state = 'On'
+            print(f'Turning on {self.room} light')
+
+    def turn_off(self):
+        if self.state == 'On':
+            self.state = 'Off'
+            print(f'Turning off {self.room} light')
+
+    def toggle(self):
+        if self.state == 'Off':
+            self.turn_on()
+        else:
+            self.turn_off()
+
+    def is_dark(self):
+        return time.localtime().tm_hour >= 18 or time.localtime().tm_hour < 6
+
+# Instantiate smart lights for each room
+living_room_light = SmartLight('Living room')
+kitchen_light = SmartLight('Kitchen')
+bedroom_light = SmartLight('Bedroom')
+bathroom_light = SmartLight('Bathroom')
+
+# AI system to make intelligent decisions about when to turn lights on/off
+while True:
+    if living_room_light.is_dark():
+        living_room_light.turn_on()
+    else:
+        living_room_light.turn_off()
+
+    if kitchen_light.is_dark():
+        kitchen_light.turn_on()
+    else:
+        kitchen_light.turn_off()
+
+    if bedroom_light.is_dark():
+        bedroom_light.turn_on()
+    else:
+        bedroom_light.turn_off()
+
+    if bathroom_light.is_dark():
+        bathroom_light.turn_on()
+    else:
+        bathroom_light.turn_off()
+
+    time.sleep(60)
+    
